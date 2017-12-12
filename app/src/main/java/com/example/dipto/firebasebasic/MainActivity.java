@@ -1,5 +1,6 @@
 package com.example.dipto.firebasebasic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     EditText firebaseEditTextName;
     @BindView(R.id.firebaseEditTextEmail)
     EditText firebaseEditTextEmail;
+    @BindView(R.id.nextActivityBtn)
+    Button nextActivityBtn;
 
 
     private DatabaseReference mDatabaseReference;
@@ -46,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
         // 2. assign some value to child object
 
         name = firebaseEditTextName.getText().toString().trim();
-        email = firebaseEditTextEmail.getText().toString().trim() ;
+        email = firebaseEditTextEmail.getText().toString().trim();
 
-        HashMap<String, String> storedValue = new HashMap<String, String>() ;
-        storedValue.put("Name", name) ;
-        storedValue.put("Email", email) ;
+        HashMap<String, String> storedValue = new HashMap<String, String>();
+        storedValue.put("Name", name);
+        storedValue.put("Email", email);
 
         //mDatabaseReference.child("Name").setValue(name);
 
@@ -58,13 +61,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "Data Stored Successfully", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     Toast.makeText(MainActivity.this, "Data Stored Failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    @OnClick(R.id.nextActivityBtn)
+    public void onNextActivityBtnClicked() {
+        Intent intent = new Intent(MainActivity.this, RetrievDataActivity.class) ;
+        startActivity(intent);
     }
 }

@@ -34,6 +34,17 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"/>
+
+
+    <Button
+        android:id="@+id/nextActivityBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go To Next Activity"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"/>
 
 </RelativeLayout>
