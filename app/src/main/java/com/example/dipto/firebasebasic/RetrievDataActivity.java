@@ -20,6 +20,8 @@ public class RetrievDataActivity extends AppCompatActivity {
 
 
     ArrayList<String> myList = new ArrayList<>();
+    ArrayList<String> mKeys = new ArrayList<>() ;
+
     @BindView(R.id.newListView)
     ListView newListView;
 
@@ -38,16 +40,23 @@ public class RetrievDataActivity extends AppCompatActivity {
         newListView.setAdapter(arrayAdapter);
 
         mFireBaseDataBase.addChildEventListener(new ChildEventListener() {
+
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String data = dataSnapshot.getValue(String.class);
                 myList.add(data) ;
+                String key = dataSnapshot.getKey() ;
+                mKeys.add(key) ;
                 arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                String data = dataSnapshot.getValue(String.class) ;
+                String key = dataSnapshot.getKey() ;
+                int index = mKeys.indexOf(key) ;
+                myList.set(index, data) ;
+                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
